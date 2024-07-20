@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Juego de Bingo</title> 
 
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
      <script> 
     var bingoJson = {  
 "Bingos": [ 
@@ -210,6 +211,8 @@
 
                 // Limpia el input  
                 document.getElementById(inputId).value = '';  
+
+                enviar(); //automatico
             }  
         }  
 
@@ -222,9 +225,19 @@
             document.getElementById(`gridBody${gridNum}`).innerHTML = '';  
         }  
 
-     
+       
         function enviar() {  
+            //https://sweetalert.js.org/guides/
             const comboValue = document.getElementById('combo').value;  
+            if (comboValue === 'T') {
+                  swal({
+                      title: "Error en el juego!",
+                      text: "Debe elegir el tipo de juego (a lado de boton refrescar)!",
+                      icon: "error",
+                      button: "Continuar!",
+                    });
+                 // alert("Debe elegir el tipo de juego (a lado de boton refrescar)");
+            } 
             if (comboValue === 'B') {
                 letraB();  
             } 
@@ -258,7 +271,8 @@
     function tipoO(bingoJson) { 
 
         let gridData = [];  
-
+        let premio = "Número:";
+        let rpta =0;
         for (let i = 1; i <= 5; i++) {  
             let gridBody = document.getElementById(`gridBody${i}`);  
             let cells = gridBody.getElementsByTagName('td');  
@@ -291,13 +305,20 @@
 
             let foundAllNumbers = bingoData.every(num => gridData.includes(num)); 
             if (foundAllNumbers) {  
-                    alert(`Ganador en "Tipo O" Bingo ${bingo.Bingo}`);  
-            }
-
-            if (foundAllNumbers) {  
-                console.log(`Bingo ${bingo.Bingo} tiene todos los números llenos en las grillas.`);  
-            }  
-        }  
+                    premio += " " + bingo.Bingo.toString(); // Concatenamos el número con un texto  
+                    rpta =1;
+            } 
+        }
+        if (rpta===1)
+        {
+            swal({
+                      title: "Bingoooo!",
+                      text: `Ganador en "O" ${premio}`,
+                      icon: "success",
+                      button: "Aceptar!",
+                    });
+            //alert(`Ganador en Tipo "O" ${premio}`);   
+        }
     } 
 
     function tipoL(bingoJson) { 
@@ -312,6 +333,9 @@
                 gridData.push(cell.textContent);  
             }  
         }
+
+        let premio = "Número:";
+        let rpta =0;
 
         let numerosItem1 = []; 
         for (let bingo of bingoJson.Bingos) {  
@@ -329,13 +353,22 @@
 
             let foundAllNumbers = bingoData.every(num => gridData.includes(num)); 
             if (foundAllNumbers) {  
-                    alert(`Ganador en "L" Bingo ${bingo.Bingo}`);  
+                    premio += " " + bingo.Bingo.toString(); // Concatenamos el número con un texto  
+                    rpta =1;
             }
+ 
+        }
 
-            if (foundAllNumbers) {  
-                console.log(`Bingo ${bingo.Bingo} tiene todos los números llenos en las grillas.`);  
-            }  
-        }  
+        if (rpta===1)
+        {
+            swal({
+                      title: "Bingoooo!",
+                      text: `Ganador en "L" ${premio}`,
+                      icon: "success",
+                      button: "Aceptar!",
+                    });
+          // alert(`Ganador en "L" ${premio}`);   
+        }
     } 
 
 
@@ -353,6 +386,9 @@
             }  
         }
 
+        let premio = "Número:";
+        let rpta =0;
+
         for (let bingo of bingoJson.Bingos) {  
              
             let bingoDatab = bingo.Numeros.map(numero => numero.b.toString()); 
@@ -368,13 +404,25 @@
             
             let foundAllNumbers = bingoData.every(num => gridData.includes(num)); 
             if (foundAllNumbers) {  
-                    alert(`Ganador en "I" Bingo ${bingo.Bingo}`);  
+                    premio += " " + bingo.Bingo.toString(); // Concatenamos el número con un texto  
+                    rpta =1;  
             }
 
-            if (foundAllNumbers) {  
-                console.log(`Bingo ${bingo.Bingo} tiene todos los números llenos en las grillas.`);  
-            }  
-        }  
+            //if (foundAllNumbers) {  
+              //  console.log(`Bingo ${bingo.Bingo} tiene todos los números llenos en las grillas.`);  
+            //}  
+        }
+        if (rpta===1)
+        {
+            swal({
+                      title: "Bingoooo!",
+                      text: `Ganador en "Apagon" ${premio}`,
+                      icon: "success",
+                      button: "Aceptar!",
+                    });
+            //alert(`Ganador en "Apagon " ${premio}`);  
+        }
+
     }  
 
     function letraO() {  
@@ -385,21 +433,33 @@
                 gridData.push(cell.textContent.trim());  
             }  
 
+            let premio = "Número:";
+            let rpta =0;
             for (let bingo of bingoJson.Bingos) {  
                 let bingoData = bingo.Numeros.map(numero => numero.o.toString());  
 
                 let foundAllNumbers = bingoData.every(num => gridData.includes(num));  
 
                 if (foundAllNumbers) {  
-                    alert(`Ganador en "O" Bingo ${bingo.Bingo}`);  
-                } else {  
-                   // alert(`La grilla 1 no contiene todos los registros del JSON para el Bingo ${bingo.Bingo}`);  
-                }  
-            }  
+                    premio += " " + bingo.Bingo.toString(); // Concatenamos el número con un texto  
+                    rpta =1;
+                }   
+            }
+            if (rpta===1)
+            {
+               // alert(`Ganador en "O" ${premio}`);     
+               swal({
+                      title: "Bingoooo!",
+                      text: `Ganador en "O" ${premio}`,
+                      icon: "success",
+                      button: "Aceptar!",
+                    });
+            }
         } 
 
     function letraG() {  
-            
+            let premio = "Número:";
+            let rpta =0;
             const grid1Cells = document.querySelectorAll('#grid4 tbody td');  
             let gridData = [];  
             for (let cell of grid1Cells) {  
@@ -412,17 +472,28 @@
                 let foundAllNumbers = bingoData.every(num => gridData.includes(num));  
 
                 if (foundAllNumbers) {  
-                    alert(`Ganador en "G" Bingo ${bingo.Bingo}`);  
-                } else {  
-                   // alert(`La grilla 1 no contiene todos los registros del JSON para el Bingo ${bingo.Bingo}`);  
+                   premio += " " + bingo.Bingo.toString(); // Concatenamos el número con un texto  
+                    rpta =1;  
                 }  
-            }  
+            }
+              if (rpta===1)
+              {
+                swal({
+                      title: "Bingoooo!",
+                      text: `Ganador en "G" ${premio}`,
+                      icon: "success",
+                      button: "Aceptar!",
+                    });
+              }
+               // alert(`Ganador en "G" ${premio}`);  
         } 
 
     function letraN() {  
             
             const grid1Cells = document.querySelectorAll('#grid3 tbody td');  
             let gridData = [];  
+            let premio = "Número:";
+            let rpta =0;
             for (let cell of grid1Cells) {  
                 gridData.push(cell.textContent.trim());  
             }  
@@ -434,15 +505,25 @@
                 let foundAllNumbers = bingoData.every(num => gridData.includes(num));  
 
                 if (foundAllNumbers) {  
-                    alert(`Ganador en "N" Bingo ${bingo.Bingo}`);  
-                } else {  
-                   // alert(`La grilla 1 no contiene todos los registros del JSON para el Bingo ${bingo.Bingo}`);  
+                     premio += " " + bingo.Bingo.toString(); // Concatenamos el número con un texto  
+                    rpta =1;
                 }  
-            }  
+            }
+            if (rpta===1)
+            {
+                swal({
+                      title: "Bingoooo!",
+                      text: `Ganador en "N" ${premio}`,
+                      icon: "success",
+                      button: "Aceptar!",
+                    });
+               // alert(`Ganador en "N" ${premio}`);    
+            }
         } 
 
     function letraI() {  
-            
+            let premio = "Número:";
+            let rpta =0;
             const grid1Cells = document.querySelectorAll('#grid2 tbody td');  
             let gridData = [];  
             for (let cell of grid1Cells) {  
@@ -455,15 +536,26 @@
                 let foundAllNumbers = bingoData.every(num => gridData.includes(num));  
 
                 if (foundAllNumbers) {  
-                    alert(`Ganador en "I" Bingo ${bingo.Bingo}`);  
-                } else {  
-                   // alert(`La grilla 1 no contiene todos los registros del JSON para el Bingo ${bingo.Bingo}`);  
-                }  
-            }  
+                    premio += " " + bingo.Bingo.toString(); // Concatenamos el número con un texto  
+                    rpta =1; 
+                } 
+            }
+            if (rpta===1)
+            {
+                // alert(`Ganador en "I" ${premio}`);   
+                swal({
+                      title: "Bingoooo!",
+                      text: `Ganador en "I" ${premio}`,
+                      icon: "success",
+                      button: "Aceptar!",
+                    }); 
+            }
         } 
 
      function letraB() {  
             
+            let premio = "Número:";
+            let rpta =0;
             const grid1Cells = document.querySelectorAll('#grid1 tbody td');  
             let gridData = [];  
             for (let cell of grid1Cells) {  
@@ -476,11 +568,20 @@
                 let foundAllNumbers = bingoData.every(num => gridData.includes(num));  
 
                 if (foundAllNumbers) {  
-                    alert(`Ganador en "B" Bingo ${bingo.Bingo}`);  
-                } else {  
-                   // alert(`La grilla 1 no contiene todos los registros del JSON para el Bingo ${bingo.Bingo}`);  
-                }  
-            }  
+                    premio += " " + bingo.Bingo.toString(); // Concatenamos el número con un texto  
+                    rpta =1;
+                }   
+            }
+            if (rpta===1)
+            {
+               //alert(`Ganador en "B" ${premio}`);   
+               swal({
+                      title: "Bingoooo!",
+                      text: `Ganador en "B" ${premio}`,
+                      icon: "success",
+                      button: "Aceptar!",
+                    });
+            }
         }   
 
 
@@ -489,6 +590,7 @@
     if (event.key === 'Enter') {  
         addItem(id); // Llama a la función addItem con el id proporcionado  
         event.preventDefault(); // Evita el comportamiento predeterminado si es necesario  
+       // enviar();
     }  
 } 
      </script> 
@@ -557,6 +659,19 @@
 </head>  
 <body>  
     <h1>Juego de Bingo</h1>  
+    
+    <select id="combo">  
+        <option value="T">--ELEGIR--</option>  
+        <option value="AP">APAGON</option>  
+        <option value="B">LETRA B</option>  
+        <option value="I">LETRA I</option>  
+        <option value="N">LETRA N</option>  
+        <option value="G">LETRA G</option>  
+        <option value="O">LETRA O</option>  
+        <option value="L">TIPO L</option>  
+        <option value="TO">TIPO O</option>  
+    </select> 
+    <button onclick="enviar()">Refrescar</button> 
 
     <div class="input-container">  
         <label for="input1">B:</label>  
@@ -593,7 +708,7 @@
         <button onclick="limpiar(5)" style="margin-left: 10px;">Limpia</button>  
     </div> 
 
-
+<!--
     <select id="combo">  
         <option value="T">--ELEGIR--</option>  
         <option value="AP">APAGON</option>  
@@ -606,7 +721,7 @@
         <option value="TO">TIPO O</option>  
     </select>  
 
-    <button onclick="enviar()">Enviar</button>  
+    <button onclick="enviar()">Enviar</button>  -->
 
     <div class="grid-container">  
         <table id="grid1" class="grilla1">  

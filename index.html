@@ -1,0 +1,669 @@
+<!DOCTYPE html>  
+<html lang="es">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Juego de Bingo</title> 
+
+     <script> 
+    var bingoJson = {  
+"Bingos": [ 
+{"Bingo": 141, "Numeros": [{"item": 1, "b": 15, "i": 28, "n": 31,"g":51, "o": 74}, 
+{"item": 2, "b": 7, "i": 29, "n": 38,"g":48, "o": 72}, 
+{"item": 3, "b": 10, "i": 27, "n": 0,"g":55, "o": 69}, 
+{"item": 4, "b": 14, "i": 18, "n": 39,"g":47, "o": 64}, 
+{"item": 5, "b": 6, "i": 22, "n": 41,"g":60, "o": 63}] } , 
+{"Bingo": 142, "Numeros": [{"item": 1, "b": 10, "i": 29, "n": 38,"g":55, "o": 72}, 
+{"item": 2, "b": 4, "i": 23, "n": 40,"g":58, "o": 61}, 
+{"item": 3, "b": 7, "i": 18, "n": 0,"g":48, "o": 64}, 
+{"item": 4, "b": 12, "i": 20, "n": 42,"g":54, "o": 75}, 
+{"item": 5, "b": 14, "i": 27, "n": 39,"g":47, "o": 69}] } , 
+{"Bingo": 143, "Numeros": [{"item": 1, "b": 4, "i": 18, "n": 40,"g":48, "o": 61}, 
+{"item": 2, "b": 11, "i": 25, "n": 33,"g":57, "o": 66}, 
+{"item": 3, "b": 12, "i": 23, "n": 0,"g":58, "o": 75}, 
+{"item": 4, "b": 3, "i": 24, "n": 43,"g":56, "o": 73}, 
+{"item": 5, "b": 7, "i": 20, "n": 42,"g":54, "o": 64}] } , 
+{"Bingo": 144, "Numeros": [{"item": 1, "b": 11, "i": 23, "n": 33,"g":57, "o": 75}, 
+{"item": 2, "b": 9, "i": 17, "n": 36,"g":52, "o": 65}, 
+{"item": 3, "b": 3, "i": 25, "n": 0,"g":56, "o": 66}, 
+{"item": 4, "b": 1, "i": 30, "n": 37,"g":50, "o": 68}, 
+{"item": 5, "b": 12, "i": 24, "n": 43,"g":58, "o": 73}] } , 
+{"Bingo": 145, "Numeros": [{"item": 1, "b": 1, "i": 18, "n": 32,"g":54, "o": 70}, 
+{"item": 2, "b": 12, "i": 22, "n": 42,"g":53, "o": 71}, 
+{"item": 3, "b": 6, "i": 20, "n": 0,"g":52, "o": 73}, 
+{"item": 4, "b": 8, "i": 27, "n": 38,"g":50, "o": 74}, 
+{"item": 5, "b": 5, "i": 30, "n": 33,"g":51, "o": 72}] } , 
+{"Bingo": 146, "Numeros": [{"item": 1, "b": 10, "i": 21, "n": 44,"g":60, "o": 75}, 
+{"item": 2, "b": 9, "i": 24, "n": 43,"g":55, "o": 62}, 
+{"item": 3, "b": 14, "i": 28, "n": 0,"g":58, "o": 67}, 
+{"item": 4, "b": 8, "i": 27, "n": 40,"g":46, "o": 61}, 
+{"item": 5, "b": 1, "i": 18, "n": 38,"g":56, "o": 73}] } , 
+{"Bingo": 147, "Numeros": [{"item": 1, "b": 9, "i": 24, "n": 43,"g":58, "o": 67}, 
+{"item": 2, "b": 12, "i": 22, "n": 42,"g":54, "o": 70}, 
+{"item": 3, "b": 8, "i": 27, "n": 0,"g":55, "o": 62}, 
+{"item": 4, "b": 5, "i": 30, "n": 33,"g":50, "o": 74}, 
+{"item": 5, "b": 14, "i": 28, "n": 40,"g":46, "o": 61}] } , 
+{"Bingo": 148, "Numeros": [{"item": 1, "b": 8, "i": 27, "n": 32,"g":54, "o": 70}, 
+{"item": 2, "b": 2, "i": 26, "n": 34,"g":56, "o": 63}, 
+{"item": 3, "b": 12, "i": 22, "n": 0,"g":50, "o": 74}, 
+{"item": 4, "b": 4, "i": 23, "n": 45,"g":59, "o": 68}, 
+{"item": 5, "b": 5, "i": 30, "n": 33,"g":55, "o": 62}] } , 
+{"Bingo": 149, "Numeros": [{"item": 1, "b": 2, "i": 22, "n": 34,"g":56, "o": 74}, 
+{"item": 2, "b": 3, "i": 16, "n": 37,"g":57, "o": 65}, 
+{"item": 3, "b": 13, "i": 29, "n": 0,"g":59, "o": 63}, 
+{"item": 4, "b": 4, "i": 20, "n": 42,"g":53, "o": 71}, 
+{"item": 5, "b": 12, "i": 23, "n": 45,"g":50, "o": 68}] } , 
+{"Bingo": 150, "Numeros": [{"item": 1, "b": 3, "i": 26, "n": 37,"g":59, "o": 65}, 
+{"item": 2, "b": 11, "i": 29, "n": 39,"g":51, "o": 72}, 
+{"item": 3, "b": 6, "i": 16, "n": 0,"g":57, "o": 71}, 
+{"item": 4, "b": 13, "i": 19, "n": 31,"g":49, "o": 66}, 
+{"item": 5, "b": 4, "i": 20, "n": 42,"g":53, "o": 63}] } , 
+{"Bingo": 151, "Numeros": [{"item": 1, "b": 13, "i": 24, "n": 42,"g":59, "o": 63}, 
+{"item": 2, "b": 2, "i": 22, "n": 32,"g":58, "o": 69}, 
+{"item": 3, "b": 7, "i": 30, "n": 0,"g":50, "o": 61}, 
+{"item": 4, "b": 8, "i": 18, "n": 35,"g":46, "o": 67}, 
+{"item": 5, "b": 10, "i": 28, "n": 36,"g":54, "o": 38}] } , 
+{"Bingo": 152, "Numeros": [{"item": 1, "b": 7, "i": 22, "n": 32,"g":50, "o": 69}, 
+{"item": 2, "b": 6, "i": 27, "n": 45,"g":51, "o": 75}, 
+{"item": 3, "b": 2, "i": 18, "n": 0,"g":58, "o": 67}, 
+{"item": 4, "b": 9, "i": 21, "n": 43,"g":57, "o": 64}, 
+{"item": 5, "b": 8, "i": 30, "n": 35,"g":46, "o": 61}] } , 
+{"Bingo": 153, "Numeros": [{"item": 1, "b": 2, "i": 27, "n": 45,"g":51, "o": 67}, 
+{"item": 2, "b": 12, "i": 20, "n": 44,"g":52, "o": 72}, 
+{"item": 3, "b": 6, "i": 21, "n": 0,"g":57, "o": 75}, 
+{"item": 4, "b": 11, "i": 26, "n": 39,"g":60, "o": 71}, 
+{"item": 5, "b": 9, "i": 28, "n": 43,"g":58, "o": 64}] } , 
+{"Bingo": 154, "Numeros": [{"item": 1, "b": 12, "i": 20, "n": 44,"g":57, "o": 75}, 
+{"item": 2, "b": 14, "i": 19, "n": 33,"g":53, "o": 65}, 
+{"item": 3, "b": 11, "i": 26, "n": 0,"g":52, "o": 72}, 
+{"item": 4, "b": 15, "i": 25, "n": 40,"g":47, "o": 74}, 
+{"item": 5, "b": 6, "i": 21, "n": 39,"g":60, "o": 71}] } , 
+{"Bingo": 155, "Numeros": [{"item": 1, "b": 11, "i": 26, "n": 33,"g":53, "o": 65}, 
+{"item": 2, "b": 13, "i": 24, "n": 37,"g":59, "o": 63}, 
+{"item": 3, "b": 14, "i": 19, "n": 0,"g":47, "o": 74}, 
+{"item": 4, "b": 1, "i": 16, "n": 42,"g":57, "o": 70}, 
+{"item": 5, "b": 15, "i": 25, "n": 40,"g":52, "o": 72}] } , 
+{"Bingo": 156, "Numeros": [{"item": 1, "b": 13, "i": 19, "n": 37,"g":59, "o": 74}, 
+{"item": 2, "b": 4, "i": 23, "n": 41,"g":49, "o": 62}, 
+{"item": 3, "b": 1, "i": 24, "n": 0,"g":48, "o": 63}, 
+{"item": 4, "b": 5, "i": 29, "n": 31,"g":55, "o": 66}, 
+{"item": 5, "b": 14, "i": 16, "n": 42,"g":47, "o": 70}] } , 
+{"Bingo": 157, "Numeros": [{"item": 1, "b": 9, "i": 18, "n": 37,"g":52, "o": 67}, 
+{"item": 2, "b": 6, "i": 16, "n": 42,"g":47, "o": 75}, 
+{"item": 3, "b": 7, "i": 26, "n": 0,"g":51, "o": 62}, 
+{"item": 4, "b": 4, "i": 30, "n": 36,"g":53, "o": 69}, 
+{"item": 5, "b": 2, "i": 17, "n": 32,"g":54, "o": 71}] } , 
+{"Bingo": 158, "Numeros": [{"item": 1, "b": 6, "i": 16, "n": 42,"g":51, "o": 62}, 
+{"item": 2, "b": 5, "i": 24, "n": 33,"g":56, "o": 72}, 
+{"item": 3, "b": 4, "i": 30, "n": 0,"g":48, "o": 75}, 
+{"item": 4, "b": 12, "i": 25, "n": 38,"g":46, "o": 66}, 
+{"item": 5, "b": 7, "i": 26, "n": 36,"g":53, "o": 69}] } , 
+{"Bingo": 159, "Numeros": [{"item": 1, "b": 5, "i": 24, "n": 33,"g":48, "o": 75}, 
+{"item": 2, "b": 15, "i": 23, "n": 39,"g":50, "o": 73}, 
+{"item": 3, "b": 12, "i": 25, "n": 0,"g":56, "o": 72}, 
+{"item": 4, "b": 8, "i": 22, "n": 31,"g":57, "o": 70}, 
+{"item": 5, "b": 4, "i": 30, "n": 38,"g":46, "o": 66}] } , 
+{"Bingo": 160, "Numeros": [{"item": 1, "b": 12, "i": 23, "n": 39,"g":56, "o": 73}, 
+{"item": 2, "b": 10, "i": 20, "n": 44,"g":60, "o": 64}, 
+{"item": 3, "b": 15, "i": 19, "n": 0,"g":50, "o": 70}, 
+{"item": 4, "b": 11, "i": 22, "n": 43,"g":58, "o": 63}, 
+{"item": 5, "b": 8, "i": 25, "n": 31,"g":57, "o": 72}] } , 
+{"Bingo": 161, "Numeros": [{"item": 1, "b": 10, "i": 22, "n": 44,"g":50, "o": 64}, 
+{"item": 2, "b": 1, "i": 28, "n": 34,"g":59, "o": 74}, 
+{"item": 3, "b": 11, "i": 20, "n": 0,"g":60, "o": 63}, 
+{"item": 4, "b": 3, "i": 21, "n": 40,"g":56, "o": 68}, 
+{"item": 5, "b": 15, "i": 19, "n": 43,"g":58, "o": 70}] } , 
+{"Bingo": 162, "Numeros": [{"item": 1, "b": 11, "i": 28, "n": 34,"g":59, "o": 63}, 
+{"item": 2, "b": 14, "i": 29, "n": 35,"g":49, "o": 65}, 
+{"item": 3, "b": 1, "i": 21, "n": 0,"g":55, "o": 74}, 
+{"item": 4, "b": 13, "i": 27, "n": 45,"g":47, "o": 61}, 
+{"item": 5, "b": 3, "i": 20, "n": 40,"g":60, "o": 68}] } , 
+{"Bingo": 163, "Numeros": [{"item": 1, "b": 3, "i": 17, "n": 36,"g":52, "o": 66}, 
+{"item": 2, "b": 2, "i": 16, "n": 32,"g":46, "o": 71}, 
+{"item": 3, "b": 9, "i": 30, "n": 0,"g":50, "o": 67}, 
+{"item": 4, "b": 6, "i": 26, "n": 41,"g":59, "o": 63}, 
+{"item": 5, "b": 1, "i": 23, "n": 37,"g":56, "o": 68}] } , 
+{"Bingo": 164, "Numeros": [{"item": 1, "b": 9, "i": 30, "n": 32,"g":46, "o": 71}, 
+{"item": 2, "b": 10, "i": 29, "n": 38,"g":55, "o": 72}, 
+{"item": 3, "b": 2, "i": 16, "n": 0,"g":59, "o": 63}, 
+{"item": 4, "b": 11, "i": 23, "n": 33,"g":57, "o": 75}, 
+{"item": 5, "b": 6, "i": 28, "n": 41,"g":50, "o": 67}] } , 
+{"Bingo": 165, "Numeros": [{"item": 1, "b": 10, "i": 29, "n": 38,"g":59, "o": 63}, 
+{"item": 2, "b": 8, "i": 21, "n": 35,"g":49, "o": 62}, 
+{"item": 3, "b": 11, "i": 23, "n": 0,"g":55, "o": 72}, 
+{"item": 4, "b": 14, "i": 28, "n": 44,"g":51, "o": 69}, 
+{"item": 5, "b": 2, "i": 16, "n": 43,"g":57, "o": 75}] } , 
+{"Bingo": 166, "Numeros": [{"item": 1, "b": 11, "i": 21, "n": 35,"g":55, "o": 62}, 
+{"item": 2, "b": 4, "i": 18, "n": 39,"g":48, "o": 61}, 
+{"item": 3, "b": 8, "i": 28, "n": 0,"g":49, "o": 69}, 
+{"item": 4, "b": 12, "i": 24, "n": 40,"g":58, "o": 73}, 
+{"item": 5, "b": 14, "i": 23, "n": 44,"g":51, "o": 72}] } , 
+{"Bingo": 167, "Numeros": [{"item": 1, "b": 4, "i": 28, "n": 39,"g":49, "o": 61}, 
+{"item": 2, "b": 13, "i": 19, "n": 43,"g":53, "o": 65}, 
+{"item": 3, "b": 12, "i": 18, "n": 0,"g":48, "o": 73}, 
+{"item": 4, "b": 5, "i": 22, "n": 45,"g":60, "o": 70}, 
+{"item": 5, "b": 8, "i": 24, "n": 40,"g":58, "o": 69}] } , 
+{"Bingo": 168, "Numeros": [{"item": 1, "b": 13, "i": 18, "n": 43,"g":53, "o": 73}, 
+{"item": 2, "b": 15, "i": 27, "n": 34,"g":47, "o": 74}, 
+{"item": 3, "b": 5, "i": 19, "n": 0,"g":60, "o": 65}, 
+{"item": 4, "b": 7, "i": 20, "n": 31,"g":54, "o": 64}, 
+{"item": 5, "b": 12, "i": 22, "n": 45,"g":48, "o": 70}] } , 
+{"Bingo": 169, "Numeros": [{"item": 1, "b": 6, "i": 29, "n": 39,"g":57, "o": 72}, 
+{"item": 2, "b": 15, "i": 17, "n": 41,"g":48, "o": 64}, 
+{"item": 3, "b": 11, "i": 19, "n": 0,"g":51, "o": 66}, 
+{"item": 4, "b": 7, "i": 25, "n": 36,"g":47, "o": 69}, 
+{"item": 5, "b": 13, "i": 16, "n": 31,"g":49, "o": 71}] } , 
+{"Bingo": 170, "Numeros": [{"item": 1, "b": 11, "i": 17, "n": 41,"g":48, "o": 66}, 
+{"item": 2, "b": 9, "i": 27, "n": 38,"g":58, "o": 75}, 
+{"item": 3, "b": 15, "i": 25, "n": 0,"g":47, "o": 64}, 
+{"item": 4, "b": 8, "i": 24, "n": 40,"g":54, "o": 67}, 
+{"item": 5, "b": 7, "i": 19, "n": 36,"g":51, "o": 69}] } 
+] };  
+
+        
+       // function addItem(gridNum) {  
+       //     const input = document.getElementById(`input${gridNum}`).value;  
+
+        //    if (input.trim() !== '') {  
+        //        const row = document.createElement('tr');  
+        //        row.innerHTML = `  
+        //            <td>${input}</td>  
+        //        `;  
+
+          //      const gridBody = document.getElementById(`gridBody${gridNum}`);  
+          //      gridBody.appendChild(row);  
+
+          //      document.getElementById(`input${gridNum}`).value = '';  
+          //  }  
+       // }  
+
+         function addItem(column) {  
+            const inputId = `input${column}`;  
+            const inputValue = document.getElementById(inputId).value;  
+
+            if (inputValue) {  
+                const tableBody = document.getElementById(`gridBody${column}`);  
+
+                // Crea una nueva fila  
+                const newRow = document.createElement("tr");  
+
+                // Crea una celda para el valor  
+                const newCell = document.createElement("td");  
+                newCell.textContent = inputValue;  
+                newRow.appendChild(newCell);  
+
+                // Crea una celda para el botón de eliminar  
+                const deleteCell = document.createElement("td");  
+                const deleteButton = document.createElement("button");  
+                deleteButton.textContent = "-";  
+
+                // Añade el evento click para eliminar la fila  
+                deleteButton.onclick = function() {  
+                    removeItem(newRow);  
+                };  
+
+                deleteCell.appendChild(deleteButton);  
+                newRow.appendChild(deleteCell);  
+
+                // Añade la fila al cuerpo de la tabla  
+                tableBody.appendChild(newRow);  
+
+                // Limpia el input  
+                document.getElementById(inputId).value = '';  
+            }  
+        }  
+
+        function removeItem(row) {  
+            row.parentNode.removeChild(row);  
+        }  
+
+        function limpiar(gridNum) {  
+            document.getElementById(`input${gridNum}`).value = '';  
+            document.getElementById(`gridBody${gridNum}`).innerHTML = '';  
+        }  
+
+     
+        function enviar() {  
+            const comboValue = document.getElementById('combo').value;  
+            if (comboValue === 'B') {
+                letraB();  
+            } 
+            if (comboValue === 'I') {
+                letraI();  
+            } 
+            if (comboValue === 'N') {
+                letraN();  
+            } 
+            if (comboValue === 'G') {
+                letraG();  
+            } 
+            if (comboValue === 'O') {
+                letraO();  
+            } 
+
+            if (comboValue === 'AP') {
+                todoBingo(bingoJson);  
+            } 
+
+            if (comboValue === 'L') {
+                tipoL(bingoJson);  
+            } 
+
+            if (comboValue === 'TO') {
+                tipoO(bingoJson);  
+            } 
+        }  
+
+
+    function tipoO(bingoJson) { 
+
+        let gridData = [];  
+
+        for (let i = 1; i <= 5; i++) {  
+            let gridBody = document.getElementById(`gridBody${i}`);  
+            let cells = gridBody.getElementsByTagName('td');  
+
+            for (let cell of cells) {  
+                gridData.push(cell.textContent);  
+            }  
+        }
+
+        let numerosItem5 = []; 
+        let numerosItem1 = []; 
+        for (let bingo of bingoJson.Bingos) {  
+             
+            let bingoDatab = bingo.Numeros.map(numero => numero.b.toString()); 
+            let bingoDatao = bingo.Numeros.map(numero => numero.o.toString()); 
+
+            let numerosItem1 = [];  
+            let numeroItem1 = bingo.Numeros.find(numero => numero.item === 1);  
+            if (numeroItem1) {  
+                numerosItem1 = [numeroItem1.i.toString(),numeroItem1.n.toString(),numeroItem1.g.toString()]; 
+            }  
+
+            let numerosItem5 = [];  
+            let numeroItem5 = bingo.Numeros.find(numero => numero.item === 5);  
+            if (numeroItem5) {  
+                numerosItem5 = [numeroItem5.i.toString(),numeroItem5.n.toString(),numeroItem5.g.toString()]; 
+            }
+
+            let bingoData = bingoDatab.concat(bingoDatao,numerosItem1,numerosItem5);
+
+            let foundAllNumbers = bingoData.every(num => gridData.includes(num)); 
+            if (foundAllNumbers) {  
+                    alert(`Ganador en "Tipo O" Bingo ${bingo.Bingo}`);  
+            }
+
+            if (foundAllNumbers) {  
+                console.log(`Bingo ${bingo.Bingo} tiene todos los números llenos en las grillas.`);  
+            }  
+        }  
+    } 
+
+    function tipoL(bingoJson) { 
+
+        let gridData = [];  
+
+        for (let i = 1; i <= 5; i++) {  
+            let gridBody = document.getElementById(`gridBody${i}`);  
+            let cells = gridBody.getElementsByTagName('td');  
+
+            for (let cell of cells) {  
+                gridData.push(cell.textContent);  
+            }  
+        }
+
+        let numerosItem1 = []; 
+        for (let bingo of bingoJson.Bingos) {  
+             
+            let bingoDatab = bingo.Numeros.map(numero => numero.b.toString()); 
+
+            let numerosItem1 = [];  
+            let numeroItem1 = bingo.Numeros.find(numero => numero.item === 5);  
+            if (numeroItem1) {  
+                //numerosItem1.push({  b: numeroItem1.b,  i: numeroItem1.i,  n: numeroItem1.n,  g: numeroItem1.g,  o: numeroItem1.o  });  //{b: 9, i: 23, n: 56, g: 70, o: 73}
+                numerosItem1 = [numeroItem1.i.toString(),numeroItem1.n.toString(),numeroItem1.g.toString(),numeroItem1.o.toString() ]; 
+            }  
+
+            let bingoData = bingoDatab.concat(numerosItem1);
+
+            let foundAllNumbers = bingoData.every(num => gridData.includes(num)); 
+            if (foundAllNumbers) {  
+                    alert(`Ganador en "L" Bingo ${bingo.Bingo}`);  
+            }
+
+            if (foundAllNumbers) {  
+                console.log(`Bingo ${bingo.Bingo} tiene todos los números llenos en las grillas.`);  
+            }  
+        }  
+    } 
+
+
+     function todoBingo(bingoJson) { 
+
+        let gridData = [];  
+
+        // Recorremos cada una de las grillas de la tabla y extraemos los datos  
+        for (let i = 1; i <= 5; i++) {  
+            let gridBody = document.getElementById(`gridBody${i}`);  
+            let cells = gridBody.getElementsByTagName('td');  
+
+            for (let cell of cells) {  
+                gridData.push(cell.textContent);  
+            }  
+        }
+
+        for (let bingo of bingoJson.Bingos) {  
+             
+            let bingoDatab = bingo.Numeros.map(numero => numero.b.toString()); 
+            let bingoDatai = bingo.Numeros.map(numero => numero.i.toString()); 
+            //let bingoDatan = bingo.Numeros.map(numero => numero.n.toString()); 
+            let bingoDatan = bingo.Numeros.filter(numero => numero.n !== 0).map(numero => numero.n.toString());
+            let bingoDatag = bingo.Numeros.map(numero => numero.g.toString()); 
+            let bingoDatao = bingo.Numeros.map(numero => numero.o.toString()); 
+
+            //let bingoData = bingo.Numeros.map(numero => [numero.i.toString(), numero.b.toString(), numero.n.toString()]); 
+
+            let bingoData = bingoDatab.concat(bingoDatai,bingoDatan,bingoDatag,bingoDatao);
+            
+            let foundAllNumbers = bingoData.every(num => gridData.includes(num)); 
+            if (foundAllNumbers) {  
+                    alert(`Ganador en "I" Bingo ${bingo.Bingo}`);  
+            }
+
+            if (foundAllNumbers) {  
+                console.log(`Bingo ${bingo.Bingo} tiene todos los números llenos en las grillas.`);  
+            }  
+        }  
+    }  
+
+    function letraO() {  
+            
+            const grid1Cells = document.querySelectorAll('#grid5 tbody td');  
+            let gridData = [];  
+            for (let cell of grid1Cells) {  
+                gridData.push(cell.textContent.trim());  
+            }  
+
+            for (let bingo of bingoJson.Bingos) {  
+                let bingoData = bingo.Numeros.map(numero => numero.o.toString());  
+
+                let foundAllNumbers = bingoData.every(num => gridData.includes(num));  
+
+                if (foundAllNumbers) {  
+                    alert(`Ganador en "O" Bingo ${bingo.Bingo}`);  
+                } else {  
+                   // alert(`La grilla 1 no contiene todos los registros del JSON para el Bingo ${bingo.Bingo}`);  
+                }  
+            }  
+        } 
+
+    function letraG() {  
+            
+            const grid1Cells = document.querySelectorAll('#grid4 tbody td');  
+            let gridData = [];  
+            for (let cell of grid1Cells) {  
+                gridData.push(cell.textContent.trim());  
+            }  
+
+            for (let bingo of bingoJson.Bingos) {  
+                let bingoData = bingo.Numeros.map(numero => numero.g.toString());  
+
+                let foundAllNumbers = bingoData.every(num => gridData.includes(num));  
+
+                if (foundAllNumbers) {  
+                    alert(`Ganador en "G" Bingo ${bingo.Bingo}`);  
+                } else {  
+                   // alert(`La grilla 1 no contiene todos los registros del JSON para el Bingo ${bingo.Bingo}`);  
+                }  
+            }  
+        } 
+
+    function letraN() {  
+            
+            const grid1Cells = document.querySelectorAll('#grid3 tbody td');  
+            let gridData = [];  
+            for (let cell of grid1Cells) {  
+                gridData.push(cell.textContent.trim());  
+            }  
+
+            for (let bingo of bingoJson.Bingos) {  
+                //let bingoData = bingo.Numeros.map(numero => numero.n.toString());  
+                let bingoData = bingo.Numeros.filter(numero => numero.n !== 0).map(numero => numero.n.toString());
+
+                let foundAllNumbers = bingoData.every(num => gridData.includes(num));  
+
+                if (foundAllNumbers) {  
+                    alert(`Ganador en "N" Bingo ${bingo.Bingo}`);  
+                } else {  
+                   // alert(`La grilla 1 no contiene todos los registros del JSON para el Bingo ${bingo.Bingo}`);  
+                }  
+            }  
+        } 
+
+    function letraI() {  
+            
+            const grid1Cells = document.querySelectorAll('#grid2 tbody td');  
+            let gridData = [];  
+            for (let cell of grid1Cells) {  
+                gridData.push(cell.textContent.trim());  
+            }  
+
+            for (let bingo of bingoJson.Bingos) {  
+                let bingoData = bingo.Numeros.map(numero => numero.i.toString());  
+
+                let foundAllNumbers = bingoData.every(num => gridData.includes(num));  
+
+                if (foundAllNumbers) {  
+                    alert(`Ganador en "I" Bingo ${bingo.Bingo}`);  
+                } else {  
+                   // alert(`La grilla 1 no contiene todos los registros del JSON para el Bingo ${bingo.Bingo}`);  
+                }  
+            }  
+        } 
+
+     function letraB() {  
+            
+            const grid1Cells = document.querySelectorAll('#grid1 tbody td');  
+            let gridData = [];  
+            for (let cell of grid1Cells) {  
+                gridData.push(cell.textContent.trim());  
+            }  
+
+            for (let bingo of bingoJson.Bingos) {  
+                let bingoData = bingo.Numeros.map(numero => numero.b.toString());  
+
+                let foundAllNumbers = bingoData.every(num => gridData.includes(num));  
+
+                if (foundAllNumbers) {  
+                    alert(`Ganador en "B" Bingo ${bingo.Bingo}`);  
+                } else {  
+                   // alert(`La grilla 1 no contiene todos los registros del JSON para el Bingo ${bingo.Bingo}`);  
+                }  
+            }  
+        }   
+
+
+        function checkEnter(event, id) {  
+    // Verifica si la tecla presionada es Enter (key code 13)  
+    if (event.key === 'Enter') {  
+        addItem(id); // Llama a la función addItem con el id proporcionado  
+        event.preventDefault(); // Evita el comportamiento predeterminado si es necesario  
+    }  
+} 
+     </script> 
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            background-color: #E0F7FA; /* Color celeste oscuro */  
+            color: #31708f;  
+            text-align: center;  
+            padding: 20px;  
+        }  
+        h1 {  
+            color: #00897B;  
+            margin-bottom: 30px;  
+        }  
+        .input-container {  
+            display: flex;  
+            align-items: center;  
+            justify-content: center;  
+            margin: 10px 0;  
+        }  
+        .input-container label {  
+            width: 30px;  
+            margin-right: 10px;  
+        }  
+        .input-container input {  
+            width: 50px;  
+            padding: 5px;  
+            margin-right: 20px;  
+        }  
+        .input-container button {  
+            padding: 5px 10px;  
+            border-radius: 5px;  
+            border: none;  
+            background-color: #00897B;  
+            color: white;  
+            cursor: pointer;  
+            transition: background-color 0.3s;  
+        }  
+        .input-container button:hover {  
+            background-color: #00796B;  
+        }  
+        .grid-container {  
+            display: flex;  
+            justify-content: space-around;  
+            margin-top: 20px;  
+        }  
+        table {  
+            width: 100px;  
+            border-collapse: collapse;  
+        }  
+        th {  
+            background: linear-gradient(to right, #00897B 0%, #4DB6AC 100%);  
+            border: none;  
+            color: white;  
+            border-radius: 15px 15px 0 0; /* Forma de media luna */  
+            padding: 10px;  
+            text-align: center;  
+        }  
+        td {  
+            border: 1px solid #00897B;  
+            height: 30px;  
+            text-align: center;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <h1>Juego de Bingo</h1>  
+
+    <div class="input-container">  
+        <label for="input1">B:</label>  
+        <input type="text" id="input1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeydown="checkEnter(event, 1)">  
+        <button onclick="addItem(1)">+</button>  
+        <button onclick="limpiar(1)" style="margin-left: 10px;">Limpia</button>  
+    </div>  
+
+    <div class="input-container">  
+        <label for="input2">I:</label>  
+        <input type="text" id="input2" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeydown="checkEnter(event, 2)">  
+        <button onclick="addItem(2)">+</button>  
+        <button onclick="limpiar(2)" style="margin-left: 10px;">Limpia</button>  
+    </div>  
+
+    <div class="input-container">  
+        <label for="input3">N:</label>  
+        <input type="text" id="input3" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeydown="checkEnter(event, 3)">  
+        <button onclick="addItem(3)">+</button>  
+        <button onclick="limpiar(3)" style="margin-left: 10px;">Limpia</button>  
+    </div>  
+
+    <div class="input-container">  
+        <label for="input4">G:</label>  
+        <input type="text" id="input4" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeydown="checkEnter(event, 4)">  
+        <button onclick="addItem(4)">+</button>  
+        <button onclick="limpiar(4)" style="margin-left: 10px;">Limpia</button>  
+    </div>  
+
+    <div class="input-container"> 
+        <label for="input5">O:</label>  
+        <input type="text" id="input5" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeydown="checkEnter(event, 5)">  
+        <button onclick="addItem(5)">+</button>  
+        <button onclick="limpiar(5)" style="margin-left: 10px;">Limpia</button>  
+    </div> 
+
+
+    <select id="combo">  
+        <option value="T">--ELEGIR--</option>  
+        <option value="AP">APAGON</option>  
+        <option value="B">LETRA B</option>  
+        <option value="I">LETRA I</option>  
+        <option value="N">LETRA N</option>  
+        <option value="G">LETRA G</option>  
+        <option value="O">LETRA O</option>  
+        <option value="L">TIPO L</option>  
+        <option value="TO">TIPO O</option>  
+    </select>  
+
+    <button onclick="enviar()">Enviar</button>  
+
+    <div class="grid-container">  
+        <table id="grid1" class="grilla1">  
+            <thead>  
+                <tr>  
+                    <th>B</th>  
+                </tr>  
+            </thead>  
+            <tbody id="gridBody1">  
+
+            </tbody>  
+        </table>  
+
+        <table id="grid2" class="grilla2">  
+            <thead>  
+                <tr>  
+                    <th>I</th>  
+                </tr>  
+            </thead>  
+            <tbody id="gridBody2">  
+
+            </tbody>  
+        </table>  
+
+        <table id="grid3" class="grilla3">  
+            <thead>  
+                <tr>  
+                    <th>N</th>  
+                </tr>  
+            </thead>  
+            <tbody id="gridBody3">  
+
+            </tbody>  
+        </table>  
+
+        <table id="grid4" class="grilla4">  
+            <thead>  
+                <tr>  
+                    <th>G</th>  
+                </tr>  
+            </thead>  
+            <tbody id="gridBody4">  
+
+            </tbody>  
+        </table>  
+
+        <table id="grid5" class="grilla5">  
+            <thead>  
+                <tr>  
+                    <th>O</th>  
+                </tr>  
+            </thead>  
+            <tbody id="gridBody5">  
+
+            </tbody>  
+        </table>  
+    </div>  
+
+</body>  
+</html>  
